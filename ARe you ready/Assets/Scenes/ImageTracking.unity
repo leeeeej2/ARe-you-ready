@@ -5727,10 +5727,12 @@ MonoBehaviour:
   - {fileID: 9106600509830541132, guid: d63ee073e9420094d951801ad6d1bb7e, type: 3}
   - {fileID: 117720, guid: 6a4a8180d8265004da572134a65de664, type: 3}
   - {fileID: 5022769464502672003, guid: e5af5c3a87e5d154a806827dc13ef51f, type: 3}
+  - {fileID: 2464988732922791739, guid: 5516473a50b1bff48bcee3318bdb1f8e, type: 3}
   Youtube: {fileID: 196686, guid: 5ac476a112e2bc5408627f0a13c8544e, type: 3}
   Twitter: {fileID: 185194, guid: 3327a79dfa8dcfe4181a81241cc14178, type: 3}
   AndroidCall: {fileID: 162140, guid: d02bd821d40eacf4cba0a68ad65ccad5, type: 3}
   Uijin: {fileID: 8234664355370897239, guid: 56f4d47451ecaf744af7db45c2160ce2, type: 3}
+  Hagyeong: {fileID: 276478793384113571, guid: c65b80778dda9dd4a90bc1c011a36700, type: 3}
   scaleFactor: {x: 0.1, y: 0.1, z: 0.1}
   m_TrackedImageManager: {fileID: 0}
 --- !u!114 &1553674415

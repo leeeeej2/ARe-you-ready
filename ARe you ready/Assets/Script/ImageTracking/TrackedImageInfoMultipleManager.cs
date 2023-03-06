@@ -16,9 +16,6 @@ public class TrackedImageInfoMultipleManager : MonoBehaviour
     [SerializeField]
     private Camera arCamera;
 
-    //[SerializeField]
-    //private Text DebugLog2;
-
     [SerializeField]
     private Text imageTrackedText;
 
@@ -38,6 +35,9 @@ public class TrackedImageInfoMultipleManager : MonoBehaviour
     private GameObject Uijin;
 
     [SerializeField]
+    private GameObject Hagyeong;
+
+    [SerializeField]
     private Vector3 scaleFactor = new Vector3(0.01f, 1f, 0.01f);
 
     [SerializeField]
@@ -46,6 +46,7 @@ public class TrackedImageInfoMultipleManager : MonoBehaviour
     private readonly Dictionary<string, GameObject> arObjects = new();
 
     private readonly Dictionary<string, GameObject> arObjects4card = new();
+    private readonly Dictionary<string, GameObject> arObjects4HGcard = new();
 
     private Vector3 newPosition;
     //bool IsCard;
@@ -179,6 +180,13 @@ public class TrackedImageInfoMultipleManager : MonoBehaviour
 
                         //DebugLog.text = arObjects4card["Youtube"].name + arObjects4card["Twitter"].name + arObjects4card["Android"].name;
                     }
+                    else if(name == "GHStudentID")
+                    {
+                        newPosition = new Vector3(0, 0, -0.3f);
+                        var objHG = Instantiate(Hagyeong, trackedImage.transform);
+                        arObjects4HGcard["Hagyeong"] = objHG;
+                        arObjects4HGcard["Hagyeong"].transform.position = trackedImage.transform.position + new Vector3(0, 0, -0.3f);
+                    }
                     else
                     {
                         newPosition = new Vector3(0, 0, 0);
@@ -211,6 +219,14 @@ public class TrackedImageInfoMultipleManager : MonoBehaviour
                 arObjects4card["Uijin"].SetActive(true);
             }
 
+            if(!arObjects["GHStudentID"].activeSelf)
+            {
+                arObjects4HGcard["Hagyeong"].SetActive(false);
+            }
+            else{
+                arObjects4HGcard["Hagyeong"].SetActive(true);
+            }
+
             if(trackedImage.trackingState == TrackingState.Tracking)
             {
                 imageTrackedText.text = trackedImage.referenceImage.name;
@@ -219,15 +235,22 @@ public class TrackedImageInfoMultipleManager : MonoBehaviour
                     newPosition = new Vector3(0, 0, 0.35f);
                     //IsCard = true;
                 }
+                else if(trackedImage.referenceImage.name == "GHStudentID")
+                {
+                    newPosition = new Vector3(0, 0, -0.3f);
+                }
                 else
                 {
                     newPosition = new Vector3(0, 0, 0);
                 }
+                
                 arObjects[trackedImage.referenceImage.name/*name*/].transform.position = trackedImage.transform.position + newPosition;
                 arObjects4card["Youtube"].transform.position = trackedImage.transform.position+ new Vector3(0.35f, 0, 0.2f);
                 arObjects4card["Twitter"].transform.position = trackedImage.transform.position + new Vector3(-0.3f, 0, 0.05f);
                 arObjects4card["Android"].transform.position = trackedImage.transform.position + new Vector3(0.3f, 0, -0.1f);
                 arObjects4card["Uijin"].transform.position = trackedImage.transform.position + new Vector3(0, 0.05f, 0.35f);
+
+                arObjects4HGcard["Hagyeong"].transform.position = trackedImage.transform.position + new Vector3(0, 0, -0.3f);
 
             }
         }
@@ -245,7 +268,17 @@ public class TrackedImageInfoMultipleManager : MonoBehaviour
 
                 Destroy(arObjects4card["Android"]);
                 arObjects4card.Remove("Android");
+
+                Destroy(arObjects4card["Uijin"]);
+                arObjects4card.Remove("Uijin");
             }
+
+            if(trackedImage.referenceImage.name == "GHStudentID")
+            {
+                Destroy(arObjects4card["Hagyeong"]);
+                arObjects4card.Remove("Hagyeong");
+            }
+
             Destroy(arObjects[trackedImage.referenceImage.name]);
             arObjects.Remove(trackedImage.referenceImage.name);
         }
